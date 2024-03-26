@@ -1,6 +1,19 @@
 import Phaser from "phaser"
 import ChessScene from "../src/scenes/ChessScene/ChessScene.js"
+function initializeAudioContext() {
+    // Check if the AudioContext is suspended
+    if (game.sound.context.state === 'suspended') {
+        // Attempt to resume the AudioContext
+        game.sound.context.resume().then(() => {
+            console.log('AudioContext resumed successfully.');
+        }).catch((error) => {
+            console.error('Failed to resume AudioContext:', error);
+        });
+    }
+}
 
+// Add an event listener for a user gesture (e.g., click event)
+document.addEventListener('click', initializeAudioContext);
 // Phaser game configuration
 const config = {
     type: Phaser.AUTO,
